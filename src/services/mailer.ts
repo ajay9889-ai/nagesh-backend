@@ -32,15 +32,14 @@ export function getFailedMessages(): FailedEntry[] {
 }
 
 function createTransport() {
+  const user = process.env.SMTP_USER || 'nagesha2r@gmail.com';
+  const pass = (process.env.SMTP_PASS || 'tzzmmqwfctxkvkvu').replace(/\s+/g, '');
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: Number(process.env.SMTP_PORT) || 587,
-    secure: false,
+    service: 'gmail',
     auth: {
-      user: process.env.SMTP_USER || '',
-      pass: process.env.SMTP_PASS || '',
+      user,
+      pass,
     },
-    tls: { rejectUnauthorized: false },
   });
 }
 
